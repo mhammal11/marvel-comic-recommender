@@ -1,0 +1,12 @@
+/* src/components/Header/Header.css */
+.app-header {
+    background-color: #202020;
+    color: #fff;
+    padding: 20px;
+    text-align: center;
+}
+
+.app-header h1 {
+    margin: 0;
+    font-size: 2em;
+}
