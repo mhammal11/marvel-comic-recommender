@@ -1,0 +1,42 @@
+/* src/components/CharacterSearch/CharacterSearch.css */
+.character-search {
+  position: relative;
+  width: 100%;
+}
+
+.character-search input {
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.character-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  background: white;
+  border: 1px solid #ddd;
+  position: absolute;
+  width: 100%;
+  max-height: 200px; /* Adjust height as needed */
+  overflow-y: auto; /* Enables vertical scrolling */
+  z-index: 1000;
+  border-radius: 4px;
+  box-shadow: 0px 4px 8px rgba(0,0,0,0.1);
+}
+
+.character-list li {
+  padding: 10px;
+  border-bottom: 1px solid #eee;
+  cursor: pointer;
+}
+
+.character-list li:last-child {
+  border-bottom: none;
+}
+
+.character-list li:hover {
+  background-color: #f0f0f0;
+}
