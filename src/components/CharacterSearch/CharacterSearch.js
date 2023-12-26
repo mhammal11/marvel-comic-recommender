@@ -38,7 +38,7 @@ const CharacterSearch = ({ onSelectCharacter }) => {
                 type="text"
                 value={query}
                 onChange={handleChange}
-                placeholder="Search for a Marvel character"
+                placeholder="Search for a Marvel character..."
             />
             {characters.length > 0 && (
                 <ul className="character-list">
