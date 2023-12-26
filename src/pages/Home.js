@@ -47,10 +47,10 @@ const Home = () => {
 
     return (
         <div>
-            <h1>Marvel Comics Recommender</h1>
+            <h1>Who is Your Favourite Superhero?</h1>
             <CharacterSearch onSelectCharacter={handleCharacterSelect} />
             <DateRangePicker onYearRangeChange={handleYearRangeChange} />
-            <button onClick={handleFetchComics}>Fetch Comics</button>
+            <button onClick={handleFetchComics}>Generate Comics</button>
             {isFetched && comics.length === 0 && <p>No comics found for the selected criteria.</p>}
             {comics.length > 0 && <ComicDisplay comics={comics} />}
         </div>

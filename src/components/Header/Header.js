@@ -6,7 +6,6 @@ const Header = () => {
     return (
         <header className="app-header">
             <h1>Marvel Comics Recommender</h1>
-            {/* You can add navigation or other information here */}
         </header>
     );
 };
