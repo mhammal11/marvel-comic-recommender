@@ -1,0 +1,38 @@
+/* src/components/ComicCard/ComicCard.css */
+.comic-card {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    overflow: hidden;
+    width: 200px;
+    text-align: center;
+}
+
+.comic-image {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+}
+
+.comic-info {
+    padding: 10px;
+}
+
+.comic-info h3 {
+    margin: 0 0 10px 0;
+    font-size: 1.1em;
+}
+
+.comic-info p {
+    font-size: 0.9em;
+    color: #666;
+}
+
+.wishlist-image {
+    cursor: pointer;
+    margin-top: auto;
+    max-width: 30px;
+    max-height: 30px;
+    width: 8%;
+    height: 4%;
+    object-fit: fill;
+}

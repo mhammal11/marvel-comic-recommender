@@ -1,0 +1,8 @@
+/* src/components/ComicDisplay/ComicDisplay.css */
+.comic-display {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    padding: 20px;
+    justify-content: center;
+}
