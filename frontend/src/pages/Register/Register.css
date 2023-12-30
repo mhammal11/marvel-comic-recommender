@@ -6,7 +6,8 @@
     padding-bottom: 40px;
     padding-left: 20px;
     border-radius: 10px; 
-    max-width: 20%; 
+    min-width: 380px;
+    width: 20%;
     text-align: center;
     display: block;
     margin-left: auto;
@@ -49,7 +50,7 @@ h2 {
     margin-top: 10px;
     margin-left: 15px;
     appearance: none;
-    width: 60%;
+    width: 70%;
     border: 1px solid rgb(231, 231, 231);
     border-color: rgb(231, 231, 231);
     border-top-color: rgb(231, 231, 231);
@@ -98,7 +99,7 @@ h2 {
     margin-top: 10px;
     margin-left: 15px;
     appearance: none;
-    width: 60%;
+    width: 70%;
     border: 1px solid;
     border-color: rgb(231, 231, 231);
     border-top-color: rgb(231, 231, 231);
