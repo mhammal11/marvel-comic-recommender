@@ -5,15 +5,17 @@ import DateRangePicker from '../../components/DateRangePicker/DateRangePicker';
 import ComicDisplay from '../../components/ComicDisplay/ComicDisplay';
 import { fetchComics } from '../../api/api';
 import './Home.css';
+import account from '../../assets/account_icon.png';
 
 const Home = () => {
     const [selectedCharacter, setSelectedCharacter] = useState(null);
     const [yearRange, setYearRange] = useState({ startYear: '', endYear: '' });
     const [comics, setComics] = useState([]);
     const [isFetched, setIsFetched] = useState(false); // To track if fetch was attempted
-    const token = localStorage.getItem('token');
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [username, setUsername] = useState('');
+    const [loading, setLoading] = useState(false);
+    const token = localStorage.getItem('token');
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -53,6 +55,7 @@ const Home = () => {
     };
 
     const handleFetchComics = async () => {
+        if (comics.length === 0) {setLoading(true)};
         if (!selectedCharacter) {
             alert('Please select a character.');
             return;
@@ -76,20 +79,23 @@ const Home = () => {
         const fetchedComics = await fetchComics(selectedCharacter.id, startDate, endDate);
         setComics(fetchedComics);
         setIsFetched(true); // Indicate that fetch was attempted
+        setLoading(false);
     };
 
     return (
         <div>
            {!isLoggedIn ? (
-                <div>
-                    <p>If you would like to add comics to your wishlist, login to your account or register for a new account.</p>
+                <div className='account'>
+                    <p>*If you would like to add comics to your wishlist, login to your account or register for a new account.</p>
                     <button onClick={() => handleLogInOrRegister('/login')}>Login</button>
                     <button onClick={() => handleLogInOrRegister('/register')}>Register</button>
                 </div>
             ) : (
-                <div>
-                    <p>Logged in as {username}</p>
-                    <button onClick={handleLogout}>Logout</button>
+                <div className='logged-in'>
+                    <img src={account} alt="Account"/>
+                    <p className='view-wishlist'>My Wishlist</p>
+                    <p className='text'>Logged in as {username}</p>
+                    <button onClick={handleLogout} className='button'>Logout</button>
                 </div>
             )}
 
@@ -97,7 +103,8 @@ const Home = () => {
             <CharacterSearch onSelectCharacter={handleCharacterSelect} />
             <DateRangePicker onYearRangeChange={handleYearRangeChange} />
             <button onClick={handleFetchComics}>Generate Comics</button>
-            {isFetched && comics.length === 0 && <p>No comics found for the selected criteria.</p>}
+            {loading && <div className="loader"></div>}
+            {isFetched && comics.length === 0 && <p className='no-comics'>No comics found for the selected criteria.</p>}
             {comics.length > 0 && <ComicDisplay comics={comics} token={token} />}
         </div>
     );
