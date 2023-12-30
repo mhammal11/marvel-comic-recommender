@@ -1,10 +1,12 @@
 /* src/components/ComicCard/ComicCard.css */
 .comic-card {
+    position: relative;
     border: 1px solid #ddd;
     border-radius: 8px;
     overflow: hidden;
     width: 200px;
     text-align: center;
+    padding-bottom: 30px;
 }
 
 .comic-image {
@@ -28,11 +30,11 @@
 }
 
 .wishlist-image {
+    position: absolute;
+    bottom: 10px; 
+    transform: translateX(-50%);
     cursor: pointer;
-    margin-top: auto;
-    max-width: 30px;
-    max-height: 30px;
-    width: 8%;
-    height: 4%;
+    max-width: 8%;
+    min-height: 4%;
     object-fit: fill;
 }

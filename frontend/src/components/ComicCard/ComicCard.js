@@ -56,7 +56,7 @@ const ComicCard = ({ comic, token }) => {
             />
             <div className="comic-info">
                 <h3>{comic.title}</h3>
-                <p>{comic.description || 'No description available.'}</p>
+                <p>{comic.description || comic.textObjects[0]?.text || 'No description available.'}</p>
             </div>
             {token && <img 
                 src={wishlistIcon} 
