@@ -38,7 +38,7 @@ const ComicCard = ({ comic, token }) => {
                 setIsInWishlist(false);
                 setWishlistIcon(defaultWishlistIcon);
             } else {
-                await addToWishlist(comic.id, token);
+                await addToWishlist(comic, token);
                 setIsInWishlist(true);
                 setWishlistIcon(activeWishlistIcon);
             }

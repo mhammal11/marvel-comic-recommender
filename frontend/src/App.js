@@ -6,6 +6,7 @@ import Home from './pages/Home/Home';
 import LaunchAnimation from './components/LaunchAnimation/LaunchAnimation';
 import Login from './pages/Login/Login';
 import Register from './pages/Register/Register';
+import Wishlist from './pages/Wishlist/Wishlist';
 import { AuthProvider } from './context/AuthContext';
 
 const App = () => {
@@ -24,6 +25,7 @@ const App = () => {
                                 <Route path="/" element={<Home />} />
                                 <Route path="/login" element={<Login />} />
                                 <Route path="/register" element={<Register />} />
+                                <Route path="/wishlist" element={<Wishlist token={localStorage.getItem('token')} />} />
                             </Routes>
                         </>
                     )}

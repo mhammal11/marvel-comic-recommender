@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom'; // For programmatically navigating
+import { useNavigate, Link } from 'react-router-dom'; // For programmatically navigating
 import CharacterSearch from '../../components/CharacterSearch/CharacterSearch';
 import DateRangePicker from '../../components/DateRangePicker/DateRangePicker';
 import ComicDisplay from '../../components/ComicDisplay/ComicDisplay';
@@ -93,7 +93,7 @@ const Home = () => {
             ) : (
                 <div className='logged-in'>
                     <img src={account} alt="Account"/>
-                    <p className='view-wishlist'>My Wishlist</p>
+                    <Link to="/wishlist"><p className='view-wishlist'>My Wishlist</p></Link>
                     <p className='text'>Logged in as {username}</p>
                     <button onClick={handleLogout} className='button'>Logout</button>
                 </div>

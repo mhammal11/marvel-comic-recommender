@@ -36,7 +36,7 @@ router.get('/wishlist', authenticateToken, async (req, res) => {
 // route: Add to user's wishlist
 router.post('/wishlist', authenticateToken, async (req, res) => {
     try {
-        const { comicId } = req.body;
+        const { comicId, comicData } = req.body; // comicId is the ID, comicData is the entire object
         const username = req.user.username;
         
         // Check if comic already exists in the wishlist
@@ -50,8 +50,8 @@ router.post('/wishlist', authenticateToken, async (req, res) => {
         }
 
         const insertResult = await pool.query(
-            'INSERT INTO wishlist (username, comic_id) VALUES ($1, $2) RETURNING *',
-            [username, comicId]
+            'INSERT INTO wishlist (username, comic_id, comic_data) VALUES ($1, $2, $3) RETURNING *',
+            [username, comicId, comicData]
         );
 
         res.status(201).json(insertResult.rows[0]);

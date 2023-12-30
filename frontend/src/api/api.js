@@ -85,7 +85,7 @@ export const loginUser = async (username, password) => {
   }
 };
 
-export const addToWishlist = async (comicId, token) => {
+export const addToWishlist = async (comic, token) => {
   try {
       const response = await fetch(`${BACKEND_URL}/api/wishlist`, {
           method: 'POST',
@@ -93,7 +93,10 @@ export const addToWishlist = async (comicId, token) => {
               'Content-Type': 'application/json',
               'Authorization': `Bearer ${token}`
           },
-          body: JSON.stringify({ comicId })
+          body: JSON.stringify({ 
+            comicId: comic.id, 
+            comicData: comic 
+        })
       });
       if (!response.ok) {
           throw new Error('Error adding to wishlist');
@@ -103,6 +106,7 @@ export const addToWishlist = async (comicId, token) => {
       console.error('Error adding to wishlist:', error);
   }
 };
+
 
 export const removeFromWishlist = async (comicId, token) => {
   try {
@@ -114,6 +118,7 @@ export const removeFromWishlist = async (comicId, token) => {
           },
           body: JSON.stringify({ comicId })
       });
+
       if (!response.ok) {
           throw new Error('Failed to remove from wishlist');
       }
@@ -128,6 +133,7 @@ export const fetchWishlist = async (token) => {
       const response = await fetch(`${BACKEND_URL}/api/wishlist`, {
           method: 'GET',
           headers: {
+              'Content-Type': 'application/json',
               'Authorization': `Bearer ${token}`
           }
       });
