@@ -33,11 +33,15 @@ const Wishlist = () => {
             ) : (
                 <div>
                     <h1>My Wishlist</h1>
-                    <div className="comic-display">
-                        {wishlistItems.map(comic => (
-                            <ComicCard key={comic.id} comic={comic.comic_data} token={token} />
-                        ))}
-                    </div>
+                    {(wishlistItems.length > 0) ? (
+                        <div className="comic-display">
+                            {wishlistItems.map(comic => (
+                                <ComicCard key={comic.id} comic={comic.comic_data} token={token} />
+                            ))}
+                        </div>
+                    ) : (
+                        <div className='no-wishlist-message'>You don't have any comics in your wishlist</div>
+                    )}
                 </div>
             )}
         </div>
