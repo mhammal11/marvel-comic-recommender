@@ -18,6 +18,7 @@ const Home = () => {
     const [currentPage, setCurrentPage] = useState(1);
     const token = localStorage.getItem('token');
     const comicsPerPage = 10;    
+    const totalComics = 50;
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -78,7 +79,7 @@ const Home = () => {
             endDate = `${yearRange.endYear}-12-31`;
         }
 
-        const fetchedComics = await fetchComics(selectedCharacter.id, startDate, endDate, 50);
+        const fetchedComics = await fetchComics(selectedCharacter.id, startDate, endDate, totalComics);
         setComics(fetchedComics);
         setIsFetched(true); // Indicate that fetch was attempted
         setCurrentPage(1); // Reset to first page
