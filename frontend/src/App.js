@@ -25,7 +25,7 @@ const App = () => {
                                 <Route path="/" element={<Home />} />
                                 <Route path="/login" element={<Login />} />
                                 <Route path="/register" element={<Register />} />
-                                <Route path="/wishlist" element={<Wishlist token={localStorage.getItem('token')} />} />
+                                <Route path="/wishlist" element={<Wishlist />} />
                             </Routes>
                         </>
                     )}
