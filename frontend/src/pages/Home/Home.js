@@ -86,17 +86,25 @@ const Home = () => {
         setLoading(false);
     };
 
+    // Function to handle the 'Previous' button click
     const handlePreviousPage = () => {
+        // Update the current page to the previous one, but never go below 1
         setCurrentPage(currentPage => Math.max(1, currentPage - 1));
     };
-    
+
+    // Function to handle the 'Next' button click
     const handleNextPage = () => {
+        // Calculate the total number of pages
         const totalPages = Math.ceil(comics.length / comicsPerPage);
+        // Update the current page to the next one, but do not exceed the total pages
         setCurrentPage(currentPage => Math.min(totalPages, currentPage + 1));
     };
-    
+
+    // Calculate the index of the last comic on the current page
     const indexOfLastComic = currentPage * comicsPerPage;
+    // Calculate the index of the first comic on the current page
     const indexOfFirstComic = indexOfLastComic - comicsPerPage;
+    // Extract the comics to be displayed on the current page
     const currentComics = comics.slice(indexOfFirstComic, indexOfLastComic);
 
     return (
