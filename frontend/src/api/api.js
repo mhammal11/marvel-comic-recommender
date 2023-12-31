@@ -63,10 +63,10 @@ export const registerUser = async (username, password) => {
           username,
           password
       });
-      return response.data;
+      return response;
   } catch (error) {
       console.error('Error registering user:', error);
-      return null;
+      return error;
   }
 };
 

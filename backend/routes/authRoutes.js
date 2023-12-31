@@ -12,6 +12,17 @@ const router = express.Router();
 router.post('/register', async (req, res) => {
     try {
         const { username, password } = req.body;
+
+        // Check if the user already exists
+        const userExists = await pool.query(
+            'SELECT * FROM users WHERE username = $1',
+            [username]
+        );
+
+        if (userExists.rows.length > 0) {
+            return res.status(400).send('Username already exists');
+        }
+
         const hashedPassword = await bcrypt.hash(password, 10);
 
         // Insert new user into the database

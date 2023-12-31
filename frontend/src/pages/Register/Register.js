@@ -13,10 +13,11 @@ const Register = () => {
         event.preventDefault();
         try {
             const response = await registerUser(username, password);
-            if (response) {
+            if (response && response.status === 201) { // Check if the response status is 201 (Created)
                 navigate('/login');
             } else {
-                setError('Registration failed. Please try again.');
+                // If the response status is not 201, assume it's an error
+                setError(response.response.data || 'Registration failed. Please try again.');
             }
         } catch (err) {
             setError('Error occurred during registration. Please try again.');
