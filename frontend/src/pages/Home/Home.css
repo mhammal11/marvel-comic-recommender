@@ -123,3 +123,15 @@ button:active {
   @keyframes l16 { 
     100%{transform: rotate(1turn)}
   }
+
+  .pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.pagination button {
+    margin: 0 10px;
+}

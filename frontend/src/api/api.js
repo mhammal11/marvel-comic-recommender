@@ -33,7 +33,7 @@ export const fetchCharacters = async (query) => {
   }
 };
 
-export const fetchComics = async (characterId, startDate, endDate) => {
+export const fetchComics = async (characterId, startDate, endDate, totalComics) => {
   const timestamp = new Date().getTime();
   const hash = getHash(timestamp);
 
@@ -45,7 +45,7 @@ export const fetchComics = async (characterId, startDate, endDate) => {
         hash,
         dateRange: `${startDate},${endDate}`, // Format: "yyyy-mm-dd,yyyy-mm-dd"
         orderBy: 'onsaleDate',
-        limit: 10,
+        limit: totalComics,
       },
     });
 
