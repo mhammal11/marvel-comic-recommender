@@ -3,6 +3,8 @@
 ## Project Overview
 The Marvel Comics Recommender is a web application designed to provide personalized comic book recommendations from the Marvel universe. It allows users to search for comics featuring their favorite characters and filter results based on release date ranges. This project showcases a full-stack development approach, integrating a React frontend with a Node.js/Express backend and a PostgreSQL database.
 
+## [Demo](https://marvel-comics-recommender.netlify.app)
+
 ## Usage
 * Explore the Marvel Comics universe by searching for characters.
 * Filter comics based on release dates.
