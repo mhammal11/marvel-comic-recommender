@@ -1,70 +1,77 @@
-# Getting Started with Create React App
+# Marvel Comics Recommender
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Project Overview
+The Marvel Comics Recommender is a web application designed to provide personalized comic book recommendations from the Marvel universe. It allows users to search for comics featuring their favorite characters and filter results based on release date ranges. This project showcases a full-stack development approach, integrating a React frontend with a Node.js/Express backend and a PostgreSQL database.
 
-## Available Scripts
+## Usage
+* Explore the Marvel Comics universe by searching for characters.
+* Filter comics based on release dates.
+* Sign up and log in to save your favorite comics to a wishlist.
+* View detailed comic information including descriptions and cover images.
 
-In the project directory, you can run:
+## Technologies Used
+* Frontend: React.js, CSS
+* Backend: Node.js, Express
+* Database: PostgreSQL
+* Authentication: bcrypt, JSON Web Tokens (JWT)
+* API: Marvel Comics API
 
-### `npm start`
+## Local Setup Instructions
+1. **Clone the Repository**
+```
+git clone https://github.com/your-username/marvel-comics-recommender.git
+cd marvel-comics-recommender
+```
+###
+2. **Set Up the Backend**
+* Navigate to the backend directory and install dependencies:
+```
+cd backend
+npm install
+```
+* Create a PostgreSQL database and execute the following SQL commands to set up the required tables:
+```  
+CREATE TABLE users (
+    id SERIAL PRIMARY KEY,
+    username VARCHAR(50) UNIQUE NOT NULL,
+    password VARCHAR(255) NOT NULL
+);
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+CREATE TABLE wishlist (
+    id SERIAL PRIMARY KEY,
+    username VARCHAR(50) NOT NULL,
+    comic_id INTEGER NOT NULL,
+    comic_data JSONB NOT NULL,
+    FOREIGN KEY (username) REFERENCES users(username)
+);
+```
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+* Create a '.env' file in the backend directory with the following content:
+```
+DATABASE_URL=postgres://YourDbUser:YourDbPassword@localhost/YourDbName
+JWT_SECRET=YourSecretKey
+```
 
-### `npm test`
+* Start the backend server:
+```
+npm start
+```
+###
+3. **Set Up the Frontend**
+* In a new terminal, navigate to the frontend directory from the root of the project and install dependencies:
+```
+cd ../frontend
+npm install
+```
+* Create a .env file in the frontend directory with the following content:
+```
+REACT_APP_BACKEND_URL=http://localhost:3001
+REACT_APP_MARVEL_PUBLIC_KEY=YourMarvelAPIPublicKey
+REACT_APP_MARVEL_PRIVATE_KEY=YourMarvelAPIPrivateKey
+```
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+* Start the frontend application:
+```
+npm start
+```
 
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
