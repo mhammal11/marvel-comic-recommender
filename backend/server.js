@@ -19,6 +19,7 @@ app.use(express.json());
 // Configure CORS
 app.use(cors({
     origin: 'http://localhost:3000', // Allow frontend origin for development server
+    // origin: 'https://marvel-comics-recommender.netlify.app', // Allow frontend origin for production server
     methods: 'GET,POST,PUT,DELETE',
     credentials: true // Enable credentials for CORS
 }));
