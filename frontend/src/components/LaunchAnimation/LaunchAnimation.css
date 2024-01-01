@@ -53,3 +53,13 @@
     from { opacity: 1; }
     to { opacity: 0; }
 }
+
+.copyright {
+    position: absolute;
+    margin-top: 40%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-left: 30px;
+    padding-right: 30px;
+}

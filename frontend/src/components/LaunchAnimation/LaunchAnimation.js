@@ -23,6 +23,9 @@ const LaunchAnimation = ({ onFinished }) => {
           <div className="logo">
             <img src={logo} alt="Logo"/>
           </div>
+          <div className='copyright'>
+            <p>Marvel, and all related characters and elements © & ™Marvel. 2024. All Rights Reserved.</p>
+          </div>
         </div>
     );
 };
