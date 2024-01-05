@@ -8,13 +8,17 @@ const Login = () => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
-    const { signIn } = useContext(AuthContext);
-    const navigate = useNavigate();
+    const { signIn } = useContext(AuthContext); // Context hook to use the AuthContext for handling authentication status
+    const navigate = useNavigate(); // useNavigate hook to programmatically navigate users after login
 
+    // Function to handle the form submission
     const handleSubmit = async (event) => {
         event.preventDefault();
         try {
+            // Attempt to login the user with the provided credentials
             const data = await loginUser(username, password);
+
+            // Check if login was successful (token received)
             if (data && data.token) {
                 signIn(data.token); // Update auth context
                 navigate('/'); // Navigate to the home page
@@ -26,6 +30,7 @@ const Login = () => {
         }
     };
 
+    // Render the login form
     return (
         <div className='login'>
             <h2>Login</h2>

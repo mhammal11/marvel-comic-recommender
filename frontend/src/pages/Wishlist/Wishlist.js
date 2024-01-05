@@ -6,21 +6,25 @@ import { Link } from 'react-router-dom';
 
 const Wishlist = () => {
     const [wishlistItems, setWishlistItems] = useState([]);
-    const username = localStorage.getItem('username');
-    const token = localStorage.getItem('token')
+    const username = localStorage.getItem('username'); // Retrieve username from local storage
+    const token = localStorage.getItem('token') // Retrieve token from local storage
 
     useEffect(() => {
+        // Check if the user is not logged in
         if (!token && !username) {
             return
         };
+
+        // Function to load wishlist items
         const loadWishlist = async () => {
-            const items = await fetchWishlist(token);
+            const items = await fetchWishlist(token); // Fetch wishlist items using token
             setWishlistItems(items);
         };
 
-        loadWishlist();
-    }, [token, username]);
+        loadWishlist(); // Invoke the function to load wishlist
+    }, [token, username]); // Run effect when token or username changes
     
+    // Render different content based on user's login status
     return (
         <div>
             {(!token && !username) ? (

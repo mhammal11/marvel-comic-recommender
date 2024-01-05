@@ -5,9 +5,11 @@ import activeWishlistIcon from '../../assets/wishlist_red.png';
 import './ComicCard.css';
 
 const ComicCard = ({ comic, token }) => {
+    // State for wishlist status and icon
     const [isInWishlist, setIsInWishlist] = useState(false);
     const [wishlistIcon, setWishlistIcon] = useState(defaultWishlistIcon);
 
+    // useEffect to check wishlist status on component mount
     useEffect(() => {
         const checkWishlistStatus = async () => {
             if (!token) {
@@ -15,6 +17,7 @@ const ComicCard = ({ comic, token }) => {
             }
             try {
                 const wishlist = await fetchWishlist(token);
+                // Set wishlist status and icon based on whether comic is in wishlist
                 if (wishlist && wishlist.some(item => item.comic_id === comic.id)) {
                     setIsInWishlist(true);
                     setWishlistIcon(activeWishlistIcon);
@@ -27,12 +30,13 @@ const ComicCard = ({ comic, token }) => {
         checkWishlistStatus();
     }, [comic.id, token]);
 
-
+    // Function to handle wishlist add/remove actions
     const handleWishlistToggle = async () => {
         if (!token) {
-            return;
+            return; // Don't proceed if the user is not logged in
         }
         try {
+            // Add or remove from wishlist and update state and icon
             if (isInWishlist) {
                 await removeFromWishlist(comic.id, token);
                 setIsInWishlist(false);
@@ -47,6 +51,7 @@ const ComicCard = ({ comic, token }) => {
         }
     };
 
+    // Render comic card with image, info, and wishlist icon
     return (
         <div className="comic-card">
             <img 

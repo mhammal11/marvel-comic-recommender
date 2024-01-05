@@ -21,6 +21,7 @@ const Home = () => {
     const totalComics = 50;
     const navigate = useNavigate();
 
+    // Retrieve authentication status and saved comics from local storage
     useEffect(() => {
         const token = localStorage.getItem('token');
         const storedUsername = localStorage.getItem('username');
@@ -36,11 +37,13 @@ const Home = () => {
         }
     }, []);
 
+    // Redirects to login or register page, saving comics if any are fetched
     const handleLogInOrRegister = (path) => {
         if (comics.length > 0) {localStorage.setItem('savedComics', JSON.stringify(comics))};
         navigate(path);
     };
 
+    // Log out user and clear related information from local storage
     const handleLogout = () => {
         localStorage.removeItem('token');
         localStorage.removeItem('username'); // Clear username from local storage
@@ -49,20 +52,23 @@ const Home = () => {
         navigate('/'); // Navigate to home or login page after logout
     };
     
+    // Sets the selected character state
     const handleCharacterSelect = (character) => {
         setSelectedCharacter(character);
     };
 
+    // Update the yearRange state with the new start and end years
     const handleYearRangeChange = (startYear, endYear) => {
         setYearRange({ startYear, endYear });
     };
 
+    // Fetch comics based on selected character and year range
     const handleFetchComics = async () => {
-        if (comics.length === 0) {setLoading(true)};
         if (!selectedCharacter) {
             alert('Please select a character.');
             return;
         }
+        if (comics.length === 0) {setLoading(true)};
         const today = new Date();
         const month = today.getMonth()+1;
         const year = today.getFullYear();

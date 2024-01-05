@@ -7,13 +7,17 @@ const Register = () => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
-    const navigate = useNavigate();
+    const navigate = useNavigate(); // useNavigate hook to programmatically navigate users after registration
 
+    // Function to handle the form submission
     const handleSubmit = async (event) => {
         event.preventDefault();
         try {
+            // Attempt to register the user with the provided credentials
             const response = await registerUser(username, password);
-            if (response && response.status === 201) { // Check if the response status is 201 (Created)
+
+            // Check if registration was successful (response status is 201)
+            if (response && response.status === 201) { 
                 navigate('/login');
             } else {
                 // If the response status is not 201, assume it's an error
@@ -24,6 +28,7 @@ const Register = () => {
         }
     };
 
+    // Render the registration form
     return (
         <div className='register'>
             <h2>Register</h2>

@@ -1,4 +1,5 @@
 const express = require('express');
+
 const jwt = require('jsonwebtoken');
 
 require('dotenv').config();
@@ -7,48 +8,54 @@ const pool = require('../db');
 
 const router = express.Router();
 
-// Middleware to verify token
+// Middleware to verify JWT token
 const authenticateToken = (req, res, next) => {
+    // Extract token from the Authorization header
     const authHeader = req.headers['authorization'];
     const token = authHeader && authHeader.split(' ')[1];
     
+    // If no token is provided, return 401 Unauthorized
     if (token == null) return res.sendStatus(401);
 
+    // Verify the token; if invalid, return 403 Forbidden
     jwt.verify(token, process.env.JWT_SECRET, (err, user) => {
         if (err) return res.sendStatus(403);
-        req.user = user;
-        next();
+        req.user = user; // Set user data from token
+        next(); // Proceed to the next middleware/route handler
     });
 };
 
-// route: Fetch user's wishlist
+// Fetch user's wishlist
 router.get('/wishlist', authenticateToken, async (req, res) => {
     try {
-        const username = req.user.username;
+        const username = req.user.username; // Extract username from token
+        // Query to select all wishlist items for the user
         const result = await pool.query('SELECT * FROM wishlist WHERE username = $1', [username]);
-        res.json(result.rows);
+        res.json(result.rows); // Send wishlist items in response
     } catch (error) {
         console.error(error);
         res.status(500).send('Server error');
     }
 });
 
-// route: Add to user's wishlist
+// Add to user's wishlist
 router.post('/wishlist', authenticateToken, async (req, res) => {
     try {
-        const { comicId, comicData } = req.body; // comicId is the ID, comicData is the entire object
+        const { comicId, comicData } = req.body; // Extract comicId and comicData from request body
         const username = req.user.username;
-        
-        // Check if comic already exists in the wishlist
+
+        // Check if the comic is already in the wishlist
         const checkResult = await pool.query(
             'SELECT * FROM wishlist WHERE username = $1 AND comic_id = $2',
             [username, comicId]
         );
 
         if (checkResult.rows.length > 0) {
+            // Comic already exists in the wishlist
             return res.status(409).json({ message: 'This comic is already in your wishlist' });
         }
 
+        // Insert new wishlist item
         const insertResult = await pool.query(
             'INSERT INTO wishlist (username, comic_id, comic_data) VALUES ($1, $2, $3) RETURNING *',
             [username, comicId, comicData]
@@ -61,12 +68,13 @@ router.post('/wishlist', authenticateToken, async (req, res) => {
     }
 });
 
-// route: Remove from user's wishlist
+// Remove from user's wishlist
 router.delete('/wishlist', authenticateToken, async (req, res) => {
     try {
-        const { comicId } = req.body;
+        const { comicId } = req.body; // Extract comicId from request body
         const username = req.user.username;
 
+        // Delete the wishlist item
         await pool.query(
             'DELETE FROM wishlist WHERE username = $1 AND comic_id = $2',
             [username, comicId]
